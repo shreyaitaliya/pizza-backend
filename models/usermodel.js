@@ -13,6 +13,10 @@ const userSchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    "role": {
+        type: String,
+        require: true,
+    }
 })
 
 let tblName = mongoose.model('user', userSchema);
