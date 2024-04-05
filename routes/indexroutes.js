@@ -27,7 +27,6 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + uniqueSuffix)
     }
 })
-
 const upload = multer({ storage: storage }).single('image');
 
 //user routes 
@@ -37,6 +36,8 @@ routes.get('/login', usercontrollers.login);
 //food verity
 routes.post('/foodAdd', upload, foodcontroller.foodAdd);
 routes.get('/foodView', upload, foodcontroller.foodView);
+routes.delete('/foodDelete',upload,foodcontroller.foodDelete);
+routes.put('/foodUpdate',upload,foodcontroller.foodUpdate);
 
 //subfood verity
 routes.post('/subadd', upload, subfoodcontrollers.subadd);

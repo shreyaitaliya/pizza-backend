@@ -31,6 +31,30 @@ const foodView = async (req, res) => {
     }
 }
 
+const foodDelete = async (req, res) => {
+    try {
+        let deleteData = await foodmodel.findByIdAndDelete(req.query.id);
+        return res.status(200).send({
+            success: true,
+            message: "food deleted successfully"
+        })
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+const foodUpdate = async (req, res) => {
+    try {
+        let updateData = await foodmodel.findByIdAndUpdate(req.query.id, {
+
+        })
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
 module.exports = ({
-    foodAdd, foodView
+    foodAdd, foodView, foodDelete, foodUpdate
 })

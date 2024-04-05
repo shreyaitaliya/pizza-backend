@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1/pizza-website');
+mongoose.connect('mongodb+srv://ruta:123@cluster0.2chd4c8.mongodb.net/mern');
 
 const db = mongoose.connection;
 
