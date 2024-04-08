@@ -4,20 +4,32 @@ const port = 8000;
 
 const app = express();
 
-const db = require('./config/db');    
+const db = require('./config/db');
+
+const cloudinary = require('cloudinary').v2;
+
+
+
+cloudinary.config({
+    cloud_name: 'dkfkas2wd',
+    api_key: '398623515327123',
+    api_secret: 'Tvi7UPuOBY7ASdkDqPUPnJTPz1I',
+    secure: true
+});
 
 app.use(express.urlencoded());
 
-app.use(express.json());
+// app.use(express.json());
 
-const cors = require('cors');
-app.use(cors());
+// const cors = require('cors');
+// app.use(cors());
+
 
 app.use('/', require('./routes/indexroutes'));
 
 app.listen(port, (error) => {
     if (error) {
-        console.log(error);    
+        console.log(error);
         return false;
     }
     console.log(`server start on ${port}`);

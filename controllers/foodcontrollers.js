@@ -1,19 +1,20 @@
 const foodmodel = require('../models/foodModel');
 
+const cloudinary = require('cloudinary').v2
+
 const foodAdd = async (req, res) => {
     try {
+        // Upload image to Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path);
+        console.log(result);
         let foodadd = await foodmodel.create({
             foodname: req.body.foodname,
-            image: req.file.path
+            image: result.secure_url
         })
-        return res.status(200).send({
-            success: true,
-            message: "sucessfully Added",
-            foodadd
-        })
+        res.status(201).send({ message: 'Record added successfully', record: foodadd });
     } catch (error) {
-        console.log(error);
-        return false;
+        console.error(error);
+        res.status(500).send({ message: 'Error adding record' });
     }
 }
 
