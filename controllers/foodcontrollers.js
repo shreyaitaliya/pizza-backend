@@ -54,20 +54,20 @@ const foodDelete = async (req, res) => {
 const foodUpdate = async (req, res) => {
     try {
         let alldata = await foodmodel.findById(req.query.id);
-        console.log(alldata);
         if (req.file) {
-            let result = await cloudinary.uploader.destroy(alldata.image);
-            console.log(result);
+            let result = await cloudinary.uploader.destroy(alldata.image_public_id);
+
         }
-        // let updatedata = await foodmodel.findByIdAndUpdate(req.query.id, {
-        //     foodname: req.body.foodname,
-        //     image: result.secure_url
-        // })
-        // return res.status(200).send({
-        //     success: true,
-        //     message: "Food Update SUcessfully",
-        //     updatedata
-        // })
+        let newresult = await cloudinary.uploader.upload(req.file.path);
+        let updatedata = await foodmodel.findByIdAndUpdate(req.query.id, {
+            foodname: req.body.foodname,
+            image: newresult.secure_url
+        })
+        return res.status(200).send({
+            success: true,
+            message: "Food Update SUcessfully",
+            alldata
+        })
     } catch (error) {
         console.log(error);
         return false;

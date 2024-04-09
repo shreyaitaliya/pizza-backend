@@ -31,7 +31,7 @@ routes.get('/login', usercontrollers.login);
 routes.post('/foodAdd', upload.single('image'), foodcontroller.foodAdd);
 routes.get('/foodView', foodcontroller.foodView);
 routes.delete('/foodDelete', foodcontroller.foodDelete);
-routes.put('/foodUpdate', foodcontroller.foodUpdate);
+routes.put('/foodUpdate', upload.single('image'), foodcontroller.foodUpdate);
 
 //subfood verity
 routes.post('/subadd', subfoodcontrollers.subadd);
