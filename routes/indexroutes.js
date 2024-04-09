@@ -18,9 +18,6 @@ const subfoodcontrollers = require('../controllers/subfoodcontrollers');
 //multer
 const multer = require('multer');
 
-
-
-
 const storage = multer.diskStorage({});
 
 // Multer upload configuration

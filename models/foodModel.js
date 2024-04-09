@@ -8,7 +8,12 @@ const foodSchema = mongoose.Schema({
     image: {
         type: String,
         require: true,
+    },
+    image_public_id: {
+        type: String,
+        require: true
     }
+
 })
 
 let tblName = mongoose.model('foodName', foodSchema);
