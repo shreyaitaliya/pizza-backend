@@ -28,7 +28,7 @@ routes.post('/register', usercontrollers.register);
 routes.get('/login', usercontrollers.login);
 
 //food verity
-routes.post('/foodAdd', upload.single('image'), foodcontroller.foodAdd);
+routes.post('/foodAdd', verifytoken, upload.single('image'), foodcontroller.foodAdd);
 routes.get('/foodView', foodcontroller.foodView);
 routes.delete('/foodDelete', foodcontroller.foodDelete);
 routes.put('/foodUpdate', upload.single('image'), foodcontroller.foodUpdate);
