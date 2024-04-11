@@ -15,6 +15,9 @@ cloudinary.config({
     secure: true
 });
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(express.urlencoded());
 
 app.use('/', require('./routes/indexroutes'));

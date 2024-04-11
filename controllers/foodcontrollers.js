@@ -1,9 +1,17 @@
 const foodmodel = require('../models/foodModel');
 
-const cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary').v2;
 
 const foodAdd = async (req, res) => {
     try {
+        // dplicate not added
+        let duplicate = await foodmodel.findOne({ foodname: req.body.foodname });
+        if (duplicate) {
+            return res.status(400).send({
+                success: false,
+                message: "This Food ALready Adeed",
+            })
+        }
         // Upload image to Cloudinary
         const result = await cloudinary.uploader.upload(req.file.path);
         console.log(result.public_id);
@@ -13,6 +21,7 @@ const foodAdd = async (req, res) => {
             image_public_id: result.public_id
         })
         return res.status(201).send({
+            sucess: true,
             message: 'Record added successfully',
             record: foodadd
         });
@@ -41,7 +50,7 @@ const foodView = async (req, res) => {
 const foodDelete = async (req, res) => {
     try {
         let allimagedata = await foodmodel.findById(req.query.id);
-        if (req.file) {
+        if (allimagedata.image) {
             let deleteimage = await cloudinary.uploader.destroy(allimagedata.public_id);
         }
         let deleteData = await foodmodel.findByIdAndDelete(req.query.id);

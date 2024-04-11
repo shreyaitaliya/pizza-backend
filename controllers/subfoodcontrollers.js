@@ -1,5 +1,6 @@
 const foodModel = require('../models/foodModel');
 const subfoodModel = require('../models/subfoodModel');
+const cloudinary = require('cloudinary').v2
 
 const subadd = async (req, res) => {
     try {
@@ -10,11 +11,15 @@ const subadd = async (req, res) => {
                 message: "Food Already Added",
             })
         }
+        let imageresult = await cloudinary.uploader.upload(req.file.path);
+        // console.log(imageresult);
         let subfoodadd = await subfoodModel.create({
             foodnameId: req.body.foodnameId,
             subfood: req.body.subfood,
-            image: req.file.path,
-            price: req.body.price
+            image: imageresult.secure_url,
+            price: req.body.price,
+            description: req.body.description,
+            image_public_id: imageresult.public_id
         })
         return res.status(200).send({
             sucess: true,

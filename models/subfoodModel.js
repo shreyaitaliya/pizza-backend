@@ -16,6 +16,14 @@ const subfoodSchema = mongoose.Schema({
     price: {
         type: String,
         require: true,
+    },
+    description: {
+        type: String,
+        require: true,
+    },
+    image_public_id: {
+        type: String,
+        require: true,
     }
 })
 
